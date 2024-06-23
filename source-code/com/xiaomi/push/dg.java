@@ -1,0 +1,67 @@
+package com.xiaomi.push;
+
+import com.xiaomi.push.df;
+import java.io.File;
+import java.util.Date;
+
+/* access modifiers changed from: package-private */
+/* compiled from: Taobao */
+public class dg extends df.b {
+    final /* synthetic */ int a;
+
+    /* renamed from: a  reason: collision with other field name */
+    final /* synthetic */ df f205a;
+
+    /* renamed from: a  reason: collision with other field name */
+    File f206a;
+
+    /* renamed from: a  reason: collision with other field name */
+    final /* synthetic */ String f207a;
+
+    /* renamed from: a  reason: collision with other field name */
+    final /* synthetic */ Date f208a;
+
+    /* renamed from: a  reason: collision with other field name */
+    final /* synthetic */ boolean f209a;
+    final /* synthetic */ String b;
+
+    /* renamed from: b  reason: collision with other field name */
+    final /* synthetic */ Date f210b;
+
+    /* JADX INFO: super call moved to the top of the method (can break code semantics) */
+    dg(df dfVar, int i, Date date, Date date2, String str, String str2, boolean z) {
+        super();
+        this.f205a = dfVar;
+        this.a = i;
+        this.f208a = date;
+        this.f210b = date2;
+        this.f207a = str;
+        this.b = str2;
+        this.f209a = z;
+    }
+
+    @Override // com.xiaomi.push.ao.b, com.xiaomi.push.df.b, com.xiaomi.push.df.b
+    public void b() {
+        if (ad.d()) {
+            try {
+                File file = new File(this.f205a.f198a.getExternalFilesDir(null) + "/.logcache");
+                file.mkdirs();
+                if (file.isDirectory()) {
+                    de deVar = new de();
+                    deVar.a(this.a);
+                    this.f206a = deVar.a(this.f205a.f198a, this.f208a, this.f210b, file);
+                }
+            } catch (NullPointerException unused) {
+            }
+        }
+    }
+
+    @Override // com.xiaomi.push.ao.b
+    public void c() {
+        File file = this.f206a;
+        if (file != null && file.exists()) {
+            this.f205a.f199a.add(new df.c(this.f207a, this.b, this.f206a, this.f209a));
+        }
+        this.f205a.a((df) 0);
+    }
+}

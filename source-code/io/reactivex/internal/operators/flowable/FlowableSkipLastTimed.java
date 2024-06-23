@@ -1,0 +1,181 @@
+package io.reactivex.internal.operators.flowable;
+
+import com.youku.live.livesdk.monitor.performance.AbsPerformance;
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.Scheduler;
+import io.reactivex.b;
+import io.reactivex.internal.queue.SpscLinkedArrayQueue;
+import io.reactivex.internal.subscriptions.SubscriptionHelper;
+import io.reactivex.internal.util.BackpressureHelper;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+/* compiled from: Taobao */
+public final class FlowableSkipLastTimed<T> extends AbstractFlowableWithUpstream<T, T> {
+    final int bufferSize;
+    final boolean delayError;
+    final Scheduler scheduler;
+    final long time;
+    final TimeUnit unit;
+
+    /* compiled from: Taobao */
+    static final class SkipLastTimedSubscriber<T> extends AtomicInteger implements FlowableSubscriber<T>, Subscription {
+        private static final long serialVersionUID = -5677354903406201275L;
+        final Subscriber<? super T> actual;
+        volatile boolean cancelled;
+        final boolean delayError;
+        volatile boolean done;
+        Throwable error;
+        final SpscLinkedArrayQueue<Object> queue;
+        final AtomicLong requested = new AtomicLong();
+        Subscription s;
+        final Scheduler scheduler;
+        final long time;
+        final TimeUnit unit;
+
+        SkipLastTimedSubscriber(Subscriber<? super T> subscriber, long j, TimeUnit timeUnit, Scheduler scheduler2, int i, boolean z) {
+            this.actual = subscriber;
+            this.time = j;
+            this.unit = timeUnit;
+            this.scheduler = scheduler2;
+            this.queue = new SpscLinkedArrayQueue<>(i);
+            this.delayError = z;
+        }
+
+        @Override // org.reactivestreams.Subscription
+        public void cancel() {
+            if (!this.cancelled) {
+                this.cancelled = true;
+                this.s.cancel();
+                if (getAndIncrement() == 0) {
+                    this.queue.clear();
+                }
+            }
+        }
+
+        /* access modifiers changed from: package-private */
+        public boolean checkTerminated(boolean z, boolean z2, Subscriber<? super T> subscriber, boolean z3) {
+            if (this.cancelled) {
+                this.queue.clear();
+                return true;
+            } else if (!z) {
+                return false;
+            } else {
+                if (!z3) {
+                    Throwable th = this.error;
+                    if (th != null) {
+                        this.queue.clear();
+                        subscriber.onError(th);
+                        return true;
+                    } else if (!z2) {
+                        return false;
+                    } else {
+                        subscriber.onComplete();
+                        return true;
+                    }
+                } else if (!z2) {
+                    return false;
+                } else {
+                    Throwable th2 = this.error;
+                    if (th2 != null) {
+                        subscriber.onError(th2);
+                    } else {
+                        subscriber.onComplete();
+                    }
+                    return true;
+                }
+            }
+        }
+
+        /* access modifiers changed from: package-private */
+        public void drain() {
+            if (getAndIncrement() == 0) {
+                Subscriber<? super T> subscriber = this.actual;
+                SpscLinkedArrayQueue<Object> spscLinkedArrayQueue = this.queue;
+                boolean z = this.delayError;
+                TimeUnit timeUnit = this.unit;
+                Scheduler scheduler2 = this.scheduler;
+                long j = this.time;
+                int i = 1;
+                do {
+                    long j2 = this.requested.get();
+                    long j3 = 0;
+                    while (j3 != j2) {
+                        boolean z2 = this.done;
+                        Long l = (Long) spscLinkedArrayQueue.peek();
+                        boolean z3 = l == null;
+                        boolean z4 = (z3 || l.longValue() <= scheduler2.now(timeUnit) - j) ? z3 : true;
+                        if (!checkTerminated(z2, z4, subscriber, z)) {
+                            if (z4) {
+                                break;
+                            }
+                            spscLinkedArrayQueue.poll();
+                            subscriber.onNext(spscLinkedArrayQueue.poll());
+                            j3++;
+                        } else {
+                            return;
+                        }
+                    }
+                    if (j3 != 0) {
+                        BackpressureHelper.produced(this.requested, j3);
+                    }
+                    i = addAndGet(-i);
+                } while (i != 0);
+            }
+        }
+
+        @Override // org.reactivestreams.Subscriber
+        public void onComplete() {
+            this.done = true;
+            drain();
+        }
+
+        @Override // org.reactivestreams.Subscriber
+        public void onError(Throwable th) {
+            this.error = th;
+            this.done = true;
+            drain();
+        }
+
+        @Override // org.reactivestreams.Subscriber
+        public void onNext(T t) {
+            this.queue.offer(Long.valueOf(this.scheduler.now(this.unit)), t);
+            drain();
+        }
+
+        @Override // io.reactivex.FlowableSubscriber, org.reactivestreams.Subscriber
+        public void onSubscribe(Subscription subscription) {
+            if (SubscriptionHelper.validate(this.s, subscription)) {
+                this.s = subscription;
+                this.actual.onSubscribe(this);
+                subscription.request(AbsPerformance.LONG_NIL);
+            }
+        }
+
+        @Override // org.reactivestreams.Subscription
+        public void request(long j) {
+            if (SubscriptionHelper.validate(j)) {
+                BackpressureHelper.add(this.requested, j);
+                drain();
+            }
+        }
+    }
+
+    public FlowableSkipLastTimed(b<T> bVar, long j, TimeUnit timeUnit, Scheduler scheduler2, int i, boolean z) {
+        super(bVar);
+        this.time = j;
+        this.unit = timeUnit;
+        this.scheduler = scheduler2;
+        this.bufferSize = i;
+        this.delayError = z;
+    }
+
+    /* access modifiers changed from: protected */
+    @Override // io.reactivex.b
+    public void subscribeActual(Subscriber<? super T> subscriber) {
+        this.source.subscribe((FlowableSubscriber) new SkipLastTimedSubscriber(subscriber, this.time, this.unit, this.scheduler, this.bufferSize, this.delayError));
+    }
+}

@@ -1,0 +1,103 @@
+package io.reactivex.internal.operators.flowable;
+
+import com.youku.live.livesdk.monitor.performance.AbsPerformance;
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.b;
+import io.reactivex.internal.subscriptions.DeferredScalarSubscription;
+import io.reactivex.internal.subscriptions.SubscriptionHelper;
+import java.util.NoSuchElementException;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+import tb.k22;
+
+/* compiled from: Taobao */
+public final class FlowableElementAt<T> extends AbstractFlowableWithUpstream<T, T> {
+    final T defaultValue;
+    final boolean errorOnFewer;
+    final long index;
+
+    /* compiled from: Taobao */
+    static final class ElementAtSubscriber<T> extends DeferredScalarSubscription<T> implements FlowableSubscriber<T> {
+        private static final long serialVersionUID = 4066607327284737757L;
+        long count;
+        final T defaultValue;
+        boolean done;
+        final boolean errorOnFewer;
+        final long index;
+        Subscription s;
+
+        ElementAtSubscriber(Subscriber<? super T> subscriber, long j, T t, boolean z) {
+            super(subscriber);
+            this.index = j;
+            this.defaultValue = t;
+            this.errorOnFewer = z;
+        }
+
+        @Override // io.reactivex.internal.subscriptions.DeferredScalarSubscription, org.reactivestreams.Subscription
+        public void cancel() {
+            super.cancel();
+            this.s.cancel();
+        }
+
+        @Override // org.reactivestreams.Subscriber
+        public void onComplete() {
+            if (!this.done) {
+                this.done = true;
+                T t = this.defaultValue;
+                if (t != null) {
+                    complete(t);
+                } else if (this.errorOnFewer) {
+                    this.actual.onError(new NoSuchElementException());
+                } else {
+                    this.actual.onComplete();
+                }
+            }
+        }
+
+        @Override // org.reactivestreams.Subscriber
+        public void onError(Throwable th) {
+            if (this.done) {
+                k22.u(th);
+                return;
+            }
+            this.done = true;
+            this.actual.onError(th);
+        }
+
+        @Override // org.reactivestreams.Subscriber
+        public void onNext(T t) {
+            if (!this.done) {
+                long j = this.count;
+                if (j == this.index) {
+                    this.done = true;
+                    this.s.cancel();
+                    complete(t);
+                    return;
+                }
+                this.count = j + 1;
+            }
+        }
+
+        @Override // io.reactivex.FlowableSubscriber, org.reactivestreams.Subscriber
+        public void onSubscribe(Subscription subscription) {
+            if (SubscriptionHelper.validate(this.s, subscription)) {
+                this.s = subscription;
+                this.actual.onSubscribe(this);
+                subscription.request(AbsPerformance.LONG_NIL);
+            }
+        }
+    }
+
+    public FlowableElementAt(b<T> bVar, long j, T t, boolean z) {
+        super(bVar);
+        this.index = j;
+        this.defaultValue = t;
+        this.errorOnFewer = z;
+    }
+
+    /* access modifiers changed from: protected */
+    @Override // io.reactivex.b
+    public void subscribeActual(Subscriber<? super T> subscriber) {
+        this.source.subscribe((FlowableSubscriber) new ElementAtSubscriber(subscriber, this.index, this.defaultValue, this.errorOnFewer));
+    }
+}

@@ -1,0 +1,66 @@
+package cn.damai.tetris.component.discover.mvp;
+
+import android.view.View;
+import cn.damai.commonbusiness.discover.bean.CircleBean;
+import cn.damai.commonbusiness.discover.bean.CircleListWrapBean;
+import cn.damai.commonbusiness.discover.viewholder.CircleHotHorViewHolder;
+import cn.damai.tetris.component.discover.mvp.CircleHotHorContract;
+import cn.damai.tetris.component.drama.viewholder.OnItemBindListener;
+import cn.damai.tetris.core.AbsView;
+import com.android.alibaba.ip.runtime.AndroidInstantRuntime;
+import com.android.alibaba.ip.runtime.IpChange;
+
+/* compiled from: Taobao */
+public class CircleHotHorView extends AbsView<CircleHotHorContract.Presenter> implements CircleHotHorContract.View<CircleHotHorContract.Presenter> {
+    private static transient /* synthetic */ IpChange $ipChange;
+    private final CircleHotHorViewHolder mViewHolder;
+
+    /* compiled from: Taobao */
+    public class a implements OnItemBindListener<CircleBean> {
+        private static transient /* synthetic */ IpChange $ipChange;
+
+        a() {
+        }
+
+        /* renamed from: a */
+        public void exposeItem(View view, CircleBean circleBean, int i) {
+            IpChange ipChange = $ipChange;
+            if (AndroidInstantRuntime.support(ipChange, "866386699")) {
+                ipChange.ipc$dispatch("866386699", new Object[]{this, view, circleBean, Integer.valueOf(i)});
+                return;
+            }
+            CircleHotHorContract.Presenter presenter = (CircleHotHorContract.Presenter) CircleHotHorView.this.getPresenter();
+            if (presenter != null) {
+                presenter.exposeItem(view, circleBean, i);
+            }
+        }
+
+        /* renamed from: b */
+        public void onItemClick(CircleBean circleBean, int i) {
+            IpChange ipChange = $ipChange;
+            if (AndroidInstantRuntime.support(ipChange, "344020416")) {
+                ipChange.ipc$dispatch("344020416", new Object[]{this, circleBean, Integer.valueOf(i)});
+                return;
+            }
+            CircleHotHorContract.Presenter presenter = (CircleHotHorContract.Presenter) CircleHotHorView.this.getPresenter();
+            if (presenter != null) {
+                presenter.itemClick(circleBean, i);
+            }
+        }
+    }
+
+    public CircleHotHorView(View view) {
+        super(view);
+        this.mViewHolder = new CircleHotHorViewHolder(view, new a());
+    }
+
+    @Override // cn.damai.tetris.component.discover.mvp.CircleHotHorContract.View
+    public void setData(CircleListWrapBean circleListWrapBean, int i) {
+        IpChange ipChange = $ipChange;
+        if (AndroidInstantRuntime.support(ipChange, "1785645937")) {
+            ipChange.ipc$dispatch("1785645937", new Object[]{this, circleListWrapBean, Integer.valueOf(i)});
+            return;
+        }
+        this.mViewHolder.a(circleListWrapBean, i);
+    }
+}

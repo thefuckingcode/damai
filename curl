@@ -1,0 +1,55 @@
+curl 'https://search.damai.cn/searchajax.html?keyword=%E5%BC%A0%E5%AD%A6%E5%8F%8B&cty=&ctl=&sctl=&tsg=0&st=&et=&order=0&pageSize=30&currPage=1&tn=' \
+  -H 'referer: https://search.damai.cn/search.html?keyword=%E5%BC%A0%E5%AD%A6%E5%8F%8B&spm=a2oeg.search_category.searchtxt.dsearchbtn'
+
+=====================================================================
+
+
+POST /gw/mtop.damai.trade.order.build/1.0/ HTTP/1.1
+x-sign: ab25b00090bb12b1b5d5949c60d058029f4d0ad679626015cd
+x-sid: 132d3768ae7515e872d9badc049404eb
+x-uid: 2216157272693
+x-nettype: WIFI
+x-pv: 6.2
+x-nq: WIFI
+x-features: 27
+x-app-conf-v: 0
+x-mini-wua: angQut2fmvAlutmO5r4G6YMohWvnttZCAh%2B5oX2Ngg0s6RVs2rWeyY5hsvqxsOtUP3rcw%2Bxkg7wNHpyyF%2B90TPydRMc7bQWlUXMR3kpo88edgezBJCbUDbtWvFqVPjHPEVE5ucOJCKx9ssaY61HAcw7nmQVLWTs0v0Vq3yKjWE4SnytY22%2Bj%2Bmq26jNUrnOGhZlQ%3D
+content-type: application/x-www-form-urlencoded;charset=UTF-8
+Content-Length: 1112
+x-t: 1717923765
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+Cookie: munb=2216157272693; cookie2=132d3768ae7515e872d9badc049404eb; cna=dfLqHvmztkQCAbfiP3ND1z1N; tfstk=f5_nbsjoFz1fa6c8KNYQ7jdXKjsoOvT5zT3JeUpzbdJ6v4LpyGAleOVC9_yCqOvNhvpF9LBladX4OHECvGAPZTbRv_8p4QXAw37p2WTkatp6T38y8OBObG6kVW9JULXRaMFTzrCCOUTPr-UYkRyfbcQHUYLzhnXO2-eYkrEE_U23Hge5EjCMNdlET3WybAJ6N08yL3kZbIJwUU8PUdRwOIirT4-E7PRboXJX4nbaMAGAGbtHENAHjk5eQJIc7BxH367nz4oXtHvVTdwxaHByV9-lPS0GIgJ6bNdUrxA1bs_C464g36TwKsYG7Ru6ei5V4_oZ02viPKUGN0iWYCOMh9y0oHuEiRgas5mxVHR61jFgs0iWYCOMH5Vic2te1CGA.; isg=BDQ0ZPsi7gNG-Xr9KdwGyO5jDvumDVj3T_zejM6Vqr9COdWD9h38hVP7vHfhwZBP; csg=a4658d10; t=b9630aaf8f8583afa16b6433fa26b756; _tb_token_=787083033e331; sgcookie=W100ys9YV0B7vy2OZrwRJeC4bi1P4m2p0ME6ayeKKAo7kHrwBTvG%2Fr%2ByWIO9U9gqfqvNn%2FlD4Q26keAivE2bngQ8I8YAg1PyH69FSBBlLnk5DjH9V8TDma1DDPnB0l4d8NsR
+Dm-token: 6377c98a011ad899db48a1cbcaafc23e
+x-bx-version: 6.6.240303
+f-refer: mtop
+x-ttid: 700159%40damai_android_8.9.1
+x-app-ver: 8.9.1
+x-c-traceid: ZlZLvNrPWD4DAH7mxwLUQQ6n1717923765614005119635
+x-umt: elwBKpxLPNCZpwKP%2FGqiG4hSCgtxtvpB
+x-utdid: ZlZLvNrPWD4DAH7mxwLUQQ6n
+x-appkey: 23781390
+x-devid: Ak6Zp8qisRs0i8_yDkE9Si9hL-m9KsEX3aQ9QxwkbaAU
+user-agent: MTOPSDK%2F3.1.1.7+%28Android%3B9%3Bsamsung%3BSM-G998B%29
+Host: mtop.damai.cn
+Accept-Encoding: gzip
+Connection: Keep-Alive
+
+wua=CofS_d6adU7Ngj%2B4QLvykwUUEY02ePAsinsjpKhIihvDcMHnewdwPDodvc%2FhR6K%2FK1A%2BgCQC%2FiiiZBi7Smxjx4qOtpIJBFSD9smF2CmT9%2F34Qz%2FeoaPD%2FBhbSTpb4hYgE8wV%2BfAvDWiEitrzdlP8carHvgcwPrqiHM4WkCDJ6aQaa1C1GI3TY5UvEl7Q%2Bqzu%2F2jVwg44Qh4fgqTg%2FattvNHkReMEfAii%2FBj7afle%2BX3nsaoFiHLZ9g4ar3O7x0NplHJaCv1I%2FYLK53KGTlZPEQZN8y5AOVw7%2Fm1mVTkgGgCZlvdqGu8Ho8fwz05iijuSp1CYYSXIinVF3nMnCCgex%2BLm6lGTg0IxLnfqObI%2Ffz2X46t9wFT3OCSuRHGCKnyXQZbed&data=%7B%22buyNow%22%3A%22true%22%2C%22buyParam%22%3A%22779244090127_1_5325234329950%22%2C%22exParams%22%3A%22%7B%5C%22UMPCHANNEL_DM%5C%22%3A%5C%2210001%5C%22%2C%5C%22UMPCHANNEL_TPP%5C%22%3A%5C%2250053%5C%22%2C%5C%22atomSplit%5C%22%3A%5C%221%5C%22%2C%5C%22channel%5C%22%3A%5C%22damai_app%5C%22%2C%5C%22coVersion%5C%22%3A%5C%222.0%5C%22%2C%5C%22coupon%5C%22%3A%5C%22true%5C%22%2C%5C%22seatInfo%5C%22%3A%5C%22%5C%22%2C%5C%22signKey%5C%22%3A%5C%22clh%2BaHBYXgpkRlt1Slthf3lYe2pxVFkJYUNOfU5JYXFyWXhocF9RCHA7IxMqMBMEBjUcCgA5PGs%3D%5C%22%2C%5C%22subChannel%5C%22%3A%5C%22%5C%22%2C%5C%22umpChannel%5C%22%3A%5C%2210001%5C%22%2C%5C%22websiteLanguage%5C%22%3A%5C%22zh_CN_%23Hans%5C%22%7D%22%7DHTTP/1.1 419 
+Date: Sun, 09 Jun 2024 09:02:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 102
+Connection: keep-alive
+Cache-Control: no-store
+Access-Control-Allow-Credentials: true
+bxuuid: 06c1090c23742a941d99d7a33bf23d93
+bx-retry: true
+Location: https://mtop.damai.cn:443//gw/mtop.damai.trade.order.build/1.0/_____tmd_____/punish?x5secdata=xda820e588fa14d97f06c1090c23742a941d99d7a33bf23d931717923768a-717315356a-428584392abaac3bn2216157272693jcappuzzle__bx__mtop.damai.cn%3A443%2Fgw%2Fmtop.damai.trade.order.build%2F1.0&x5step=2&http_referer=https://sec.taobao1111.com/
+Set-Cookie: x5secdata=xda820e588fa14d97f06c1090c23742a941d99d7a33bf23d931717923768a-717315356a-428584392abaac3bn2216157272693jcappuzzle__bx__mtop.damai.cn%3A443%2Fgw%2Fmtop.damai.trade.order.build%2F1.0; Max-Age=20; Expires=Sun, 09-Jun-2024 09:03:08 GMT; Domain=damai.cn; Path=/
+Server: Tengine/Aserver
+
+{
+  "ret": [
+    "FAIL_SYS_USER_VALIDATE::.........,............,...............!"
+  ],
+  "data": {}
+}

@@ -1,0 +1,23 @@
+package tb;
+
+import com.taobao.android.dinamic.log.DinamicLog;
+import java.util.List;
+
+/* compiled from: Taobao */
+public class q11 extends v0 {
+    @Override // com.taobao.android.dinamic.expression.parser.DinamicDataParser
+    public Object evalWithArgs(List list, x70 x70) {
+        DinamicLog.h("IntGreater");
+        if (list != null && list.size() == 2) {
+            try {
+                if (Integer.parseInt(list.get(1).toString()) <= Integer.parseInt(list.get(0).toString())) {
+                    return Boolean.TRUE;
+                }
+            } catch (NumberFormatException unused) {
+                DinamicLog.h("Integer cast error!");
+                return Boolean.FALSE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+}

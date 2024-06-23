@@ -1,0 +1,150 @@
+package cn.damai.category.category.ui.viewholder;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
+import cn.damai.baseview.RCRelativeLayoutView;
+import cn.damai.category.category.bean.CategoryBannerBean;
+import cn.damai.category.category.bean.GalleyTag;
+import cn.damai.common.image.DMImageCreator;
+import cn.damai.homepage.R$drawable;
+import cn.damai.homepage.R$id;
+import cn.damai.homepage.R$layout;
+import cn.damai.uikit.view.DMLabelType;
+import cn.damai.uikit.view.DMPosterView;
+import com.ali.user.mobile.utils.ScreenUtil;
+import com.android.alibaba.ip.runtime.AndroidInstantRuntime;
+import com.android.alibaba.ip.runtime.IpChange;
+import tb.le;
+import tb.n42;
+
+/* compiled from: Taobao */
+public class CategoryGalleyHolder extends RecyclerView.ViewHolder {
+    private static transient /* synthetic */ IpChange $ipChange;
+    private View a = this.itemView.findViewById(R$id.layout_left);
+    private View b = this.itemView.findViewById(R$id.layout_right);
+    private ImageView c = ((ImageView) this.itemView.findViewById(R$id.image_item));
+    private RCRelativeLayoutView d = ((RCRelativeLayoutView) this.itemView.findViewById(R$id.image_item_bg));
+    private DMPosterView e = ((DMPosterView) this.itemView.findViewById(R$id.poster_rank));
+    private TextView f = ((TextView) this.itemView.findViewById(R$id.tv_desc1));
+    private TextView g = ((TextView) this.itemView.findViewById(R$id.tv_desc2));
+    private Context h;
+
+    /* compiled from: Taobao */
+    public class a implements DMImageCreator.DMImageFailListener {
+        private static transient /* synthetic */ IpChange $ipChange;
+
+        a(CategoryGalleyHolder categoryGalleyHolder) {
+        }
+
+        @Override // cn.damai.common.image.DMImageCreator.DMImageFailListener
+        public void onFail(DMImageCreator.d dVar) {
+            IpChange ipChange = $ipChange;
+            if (AndroidInstantRuntime.support(ipChange, "-1690376509")) {
+                ipChange.ipc$dispatch("-1690376509", new Object[]{this, dVar});
+            }
+        }
+    }
+
+    /* compiled from: Taobao */
+    public class b implements DMImageCreator.DMImageSuccListener {
+        private static transient /* synthetic */ IpChange $ipChange;
+        final /* synthetic */ CategoryBannerBean a;
+
+        b(le leVar, CategoryBannerBean categoryBannerBean) {
+            this.a = categoryBannerBean;
+        }
+
+        @Override // cn.damai.common.image.DMImageCreator.DMImageSuccListener
+        public void onSuccess(DMImageCreator.e eVar) {
+            IpChange ipChange = $ipChange;
+            if (AndroidInstantRuntime.support(ipChange, "-377652712")) {
+                ipChange.ipc$dispatch("-377652712", new Object[]{this, eVar});
+            } else if (eVar != null && eVar.b != null) {
+                throw null;
+            }
+        }
+    }
+
+    /* compiled from: Taobao */
+    public class c implements View.OnClickListener {
+        private static transient /* synthetic */ IpChange $ipChange;
+        final /* synthetic */ int a;
+        final /* synthetic */ CategoryBannerBean b;
+        final /* synthetic */ View.OnClickListener c;
+
+        c(CategoryGalleyHolder categoryGalleyHolder, int i, CategoryBannerBean categoryBannerBean, View.OnClickListener onClickListener) {
+            this.a = i;
+            this.b = categoryBannerBean;
+            this.c = onClickListener;
+        }
+
+        public void onClick(View view) {
+            IpChange ipChange = $ipChange;
+            if (AndroidInstantRuntime.support(ipChange, "-1138641645")) {
+                ipChange.ipc$dispatch("-1138641645", new Object[]{this, view});
+                return;
+            }
+            GalleyTag galleyTag = new GalleyTag();
+            galleyTag.index = this.a;
+            CategoryBannerBean categoryBannerBean = this.b;
+            galleyTag.type = categoryBannerBean.type;
+            galleyTag.rankId = categoryBannerBean.rankId;
+            galleyTag.url = categoryBannerBean.url;
+            view.setTag(galleyTag);
+            this.c.onClick(view);
+        }
+    }
+
+    public CategoryGalleyHolder(LayoutInflater layoutInflater) {
+        super(layoutInflater.inflate(R$layout.category_galley_item, (ViewGroup) null));
+        this.h = layoutInflater.getContext();
+    }
+
+    public void a(int i, View.OnClickListener onClickListener, CategoryBannerBean categoryBannerBean, le leVar, boolean z, boolean z2) {
+        IpChange ipChange = $ipChange;
+        if (AndroidInstantRuntime.support(ipChange, "-2064262582")) {
+            ipChange.ipc$dispatch("-2064262582", new Object[]{this, Integer.valueOf(i), onClickListener, categoryBannerBean, leVar, Boolean.valueOf(z), Boolean.valueOf(z2)});
+        } else if (categoryBannerBean != null) {
+            if (z) {
+                this.a.setVisibility(0);
+            } else {
+                this.a.setVisibility(8);
+            }
+            if (z2) {
+                this.b.setVisibility(0);
+            } else {
+                this.b.setVisibility(8);
+            }
+            this.d.setVisibility(8);
+            this.e.setVisibility(8);
+            int i2 = categoryBannerBean.type;
+            if (i2 == 3) {
+                this.c.setMaxHeight(ScreenUtil.dip2px(this.h, 144.0f));
+                cn.damai.common.image.a.b().e(categoryBannerBean.pic).c(R$drawable.uikit_default_image_bg_grey).g(this.c);
+            } else {
+                if (i2 == 4) {
+                    this.d.setVisibility(0);
+                    this.e.setVisibility(0);
+                    this.e.setImageUrl(categoryBannerBean.pic);
+                    this.e.setLabelType(DMLabelType.LABEL_TYPE_RANK_TOP_ONE);
+                    this.e.getLabelView().setLabelWidth(n42.a(this.h, 21.0f));
+                    this.e.getLabelView().setLabelHeight(n42.a(this.h, 21.0f));
+                    this.e.getLabelView().setLabelName("1");
+                    this.c.setImageResource(R$drawable.category_galley_rank_bg);
+                    cn.damai.common.image.a.b().e(categoryBannerBean.pic).n(new b(leVar, categoryBannerBean)).e(new a(this)).f();
+                } else {
+                    cn.damai.common.image.a.b().e(categoryBannerBean.pic).c(R$drawable.uikit_default_image_bg_grey).g(this.c);
+                }
+                this.c.setMaxHeight(ScreenUtil.dip2px(this.h, 86.0f));
+                this.f.setText(categoryBannerBean.artistName);
+                this.g.setText(categoryBannerBean.title);
+            }
+            this.itemView.setOnClickListener(new c(this, i, categoryBannerBean, onClickListener));
+        }
+    }
+}

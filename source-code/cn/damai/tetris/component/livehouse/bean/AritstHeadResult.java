@@ -1,0 +1,8 @@
+package cn.damai.tetris.component.livehouse.bean;
+
+import java.io.Serializable;
+
+/* compiled from: Taobao */
+public class AritstHeadResult implements Serializable {
+    public AritstHeadAtmosphere atmosphere;
+}

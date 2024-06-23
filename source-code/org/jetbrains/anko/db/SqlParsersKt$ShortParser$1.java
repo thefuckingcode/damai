@@ -1,0 +1,43 @@
+package org.jetbrains.anko.db;
+
+import kotlin.Metadata;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.FunctionReference;
+import kotlin.jvm.internal.Reflection;
+import kotlin.reflect.KDeclarationContainer;
+
+@Metadata(bv = {1, 0, 2}, d1 = {"\u0000\u000e\n\u0000\n\u0002\u0010\n\n\u0000\n\u0002\u0010\t\n\u0000\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u0003¢\u0006\u0002\b\u0004"}, d2 = {"<anonymous>", "", "p1", "", "invoke"}, k = 3, mv = {1, 1, 11})
+/* compiled from: SqlParsers.kt */
+final class SqlParsersKt$ShortParser$1 extends FunctionReference implements Function1<Long, Short> {
+    public static final SqlParsersKt$ShortParser$1 INSTANCE = new SqlParsersKt$ShortParser$1();
+
+    SqlParsersKt$ShortParser$1() {
+        super(1);
+    }
+
+    @Override // kotlin.jvm.internal.CallableReference, kotlin.reflect.KCallable
+    public final String getName() {
+        return "toShort";
+    }
+
+    @Override // kotlin.jvm.internal.CallableReference
+    public final KDeclarationContainer getOwner() {
+        return Reflection.getOrCreateKotlinClass(Long.TYPE);
+    }
+
+    @Override // kotlin.jvm.internal.CallableReference
+    public final String getSignature() {
+        return "shortValue()S";
+    }
+
+    /* Return type fixed from 'java.lang.Object' to match base method */
+    /* JADX DEBUG: Method arguments types fixed to match base method, original types: [java.lang.Object] */
+    @Override // kotlin.jvm.functions.Function1
+    public /* bridge */ /* synthetic */ Short invoke(Long l) {
+        return Short.valueOf(invoke(l.longValue()));
+    }
+
+    public final short invoke(long j) {
+        return (short) ((int) j);
+    }
+}
