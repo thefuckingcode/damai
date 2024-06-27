@@ -15,6 +15,9 @@
    */
   onEnter(log, args, state) {
     log(`InnerSignImpl.getMtopApiSign(${args.map(JSON.stringify).join(', ')})`);
+    
+    // 存储参数在 this 上下文中
+    this.args=args
   },
 
   /**
@@ -29,6 +32,13 @@
    */
   onLeave(log, retval, state) {
     if (retval !== undefined) {
+      // 当函数运行结束时，输出函数结果
+      log(`0000000000000${this.args[0]}`)
+      log(`1111111111111${this.args[1]}`)
+      log(`2222222222222${this.args[2]}`)
+      log(`3333333333333${this.args[3]}`)
+      log(`4444444444444${this.args[4]}`)
+      log(`<=555555555555555555555555555555555555555 ${retval}`);
       log(`<= ${JSON.stringify(retval)}`);
     }
   }

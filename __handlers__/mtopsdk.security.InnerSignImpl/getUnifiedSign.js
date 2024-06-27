@@ -16,13 +16,20 @@
     //  log(`InnerSignImpl.getUnifiedSign(111${HashMap2Str(args[0])}111,222${HashMap2Str(args[1])}222,${args[2]},${args[3]})`);
    }, onLeave(log, retval, state) {
 
+    function HashMap2Str(params_hm) {
+      var HashMap=Java.use('java.util.HashMap');
+      var args_map=Java.cast(params_hm,HashMap);
+      return args_map.toString();
+  };
      if (retval !== undefined) {
       // 当函数运行结束时，输出函数结果
-
       log(`0000000000000${this.args[0]}`)
       log(`1111111111111${this.args[1]}`)
       log(`2222222222222${this.args[2]}`)
       log(`3333333333333${this.args[3]}`)
       log(`4444444444444${this.args[4]}`)
-       log(`<= ${retval}`);
-     } }}
+      log(`5555555555555${this.args[5]}`)
+      log(`<=555555555555555555555555555555555555555 ${retval}`);
+      log(`<=555555555555555555555555555555555555555 ${HashMap2Str(retval)}`);
+     }
+    }}

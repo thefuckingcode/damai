@@ -22,6 +22,6 @@ public class SignConstants {
     public static final String MIDDLE_PARAM_EXT = "extend_paras";
     public static final String MIDDLE_PARAM_EXT_PARAM = "extendParas";
     public static final String MIDDLE_PARAM_LOGIN_VALUE = "key_login_module";
-    public static final String MIDDLE_PARAM_USE_WUA = "useWua";
+    public static final String MIDDLE_PARAM_USE_WUA = "{\"itemId\":\"807430844100\",\"performId\":\"214954089\",\"skuParamListJson\":\"[{\\\"count\\\":3,\\\"price\\\":3000,\\\"priceId\\\":\\\"278694818\\\"}]\",\"dmChannel\":\"*@damai_android_*\",\"channel_from\":\"damai_market\",\"appType\":\"1\",\"osType\":\"2\",\"calculateTag\":\"0_0_0_1\",\"source\":\"10101\",\"version\":\"6000189\",\"comboChannel\":\"1\"}";
     public static final int MINI_WUA_FLAG = 8;
 }
